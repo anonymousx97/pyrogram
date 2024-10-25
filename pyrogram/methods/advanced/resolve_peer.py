@@ -73,13 +73,23 @@ class ResolvePeer:
                     try:
                         return await self.storage.get_peer_by_username(peer_id)
                     except KeyError:
-                        await self.invoke(
+                        r = await self.invoke(
                             raw.functions.contacts.ResolveUsername(
                                 username=peer_id
                             )
                         )
 
-                        return await self.storage.get_peer_by_username(peer_id)
+                        return await self.storage.get_peer_by_id(
+                            getattr(
+                                r.peer,
+                                "user_id",
+                                getattr(
+                                    r.peer,
+                                    "channel_id",
+                                    peer_id
+                                )
+                            )
+                        )
                 else:
                     try:
                         return await self.storage.get_peer_by_phone_number(peer_id)

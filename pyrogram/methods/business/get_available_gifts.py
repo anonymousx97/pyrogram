@@ -15,31 +15,30 @@
 #
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
+from typing import List
 
-__fork_name__ = "pyrotgfork"
-__version__ = "2.1.33.12"
-__license__ = "GNU Lesser General Public License v3.0 (LGPL-3.0)"
-__copyright__ = "Copyright (C) 2017-present Dan <https://github.com/delivrance>"
-
-from concurrent.futures.thread import ThreadPoolExecutor
+import pyrogram
+from pyrogram import raw, types
 
 
-class StopTransmission(Exception):
-    pass
+class GetAvailableGifts:
+    async def get_available_gifts(
+        self: "pyrogram.Client",
+    ) -> List["types.Gift"]:
+        """Get all gifts that can be sent to other users.
 
+        .. include:: /_includes/usable-by/users.rst
 
-class StopPropagation(StopAsyncIteration):
-    pass
+        Returns:
+            List of :obj:`~pyrogram.types.Gift`: On success, a list of star gifts is returned.
 
+        Example:
+            .. code-block:: python
 
-class ContinuePropagation(StopAsyncIteration):
-    pass
+                app.get_available_gifts()
+        """
+        r = await self.invoke(
+            raw.functions.payments.GetStarGifts(hash=0)
+        )
 
-
-from . import raw, types, filters, handlers, emoji, enums
-from .client import Client
-from .sync import idle, compose
-
-__version__ = f"{__version__}-TL-{raw.all.layer}"
-
-crypto_executor = ThreadPoolExecutor(1, thread_name_prefix="CryptoWorker")
+        return types.List([await types.Gift._parse(self, gift) for gift in r.gifts])

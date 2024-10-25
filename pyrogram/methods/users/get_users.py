@@ -64,6 +64,8 @@ class GetUsers:
         )
 
         users = types.List()
+        if not r:
+            return users
 
         for i in r:
             users.append(types.User._parse(self, i))
