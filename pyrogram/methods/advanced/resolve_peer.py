@@ -21,8 +21,7 @@ import re
 from typing import Union
 
 import pyrogram
-from pyrogram import raw
-from pyrogram import utils
+from pyrogram import raw, utils
 from pyrogram.errors import PeerIdInvalid
 
 log = logging.getLogger(__name__)
@@ -79,17 +78,27 @@ class ResolvePeer:
                             )
                         )
 
-                        return await self.storage.get_peer_by_id(
-                            getattr(
-                                r.peer,
-                                "user_id",
-                                getattr(
-                                    r.peer,
-                                    "channel_id",
-                                    peer_id
-                                )
-                            )
+
+                        await self.fetch_peers(r.users)
+                        await self.fetch_peers(r.chats)
+
+                        userid = getattr(
+                            r.peer,
+                            "user_id",
+                            None
                         )
+                        channelid = getattr(
+                            r.peer,
+                            "channel_id",
+                            None
+                        )
+
+                        if userid:
+                            return await self.storage.get_peer_by_id(userid)
+                        if channelid:
+                            return await self.storage.get_peer_by_id(utils.get_channel_id(channelid))
+                        return await self.storage.get_peer_by_username(peer_id)
+
                 else:
                     try:
                         return await self.storage.get_peer_by_phone_number(peer_id)
