@@ -1,5 +1,6 @@
-Changes in this Fork
-=====================
+==============
+Release Notes
+==============
 
 This page lists all the documented changes of this fork,
 in reverse chronological order. You should read this when upgrading
@@ -9,6 +10,23 @@ it can take advantage of new goodies!
 `For a more detailed description, please check the commits. <https://github.com/TelegramPlayGround/pyrogram/commits/unknown_errors/>`_
 
 If you found any issue or have any suggestions, feel free to make `an issue <https://github.com/TelegramPlayGround/pyrogram/issues>`_ on github.
+
+Breaking Changes
+=================
+
+- PR from upstream: `1411 <https://github.com/pyrogram/pyrogram/pull/1411>`_ without attribution.
+
+Changes in this Fork
+=====================
+
++------------------------+
+| Scheme layer used: 192 |
++------------------------+
+
+- Added the parameter ``allow_paid_broadcast`` to the methods :meth:`~pyrogram.Client.copy_media_group`, :meth:`~pyrogram.Client.send_game`, :meth:`~pyrogram.Client.send_invoice`, :meth:`~pyrogram.Client.forward_messages`, :meth:`~pyrogram.Client.send_animation`, :meth:`~pyrogram.Client.send_audio`, :meth:`~pyrogram.Client.send_cached_media`, :meth:`~pyrogram.Client.send_contact`, :meth:`~pyrogram.Client.send_dice`, :meth:`~pyrogram.Client.send_document`, :meth:`~pyrogram.Client.send_location`, :meth:`~pyrogram.Client.send_media_group`, :meth:`~pyrogram.Client.send_message`, :meth:`~pyrogram.Client.send_paid_media`, :meth:`~pyrogram.Client.send_photo`, :meth:`~pyrogram.Client.send_poll`, :meth:`~pyrogram.Client.send_sticker`, :meth:`~pyrogram.Client.send_venue`, :meth:`~pyrogram.Client.send_video_note`, :meth:`~pyrogram.Client.send_video`, :meth:`~pyrogram.Client.send_voice` and the bound methods :meth:`~pyrogram.types.Message.reply_game`, :meth:`~pyrogram.types.Message.reply_text`, :meth:`~pyrogram.types.Message.reply_animation`, :meth:`~pyrogram.types.Message.reply_audio`, :meth:`~pyrogram.types.Message.reply_contact`, :meth:`~pyrogram.types.Message.reply_document`, :meth:`~pyrogram.types.Message.reply_location`, :meth:`~pyrogram.types.Message.reply_media_group`, :meth:`~pyrogram.types.Message.reply_photo`, :meth:`~pyrogram.types.Message.reply_poll`, :meth:`~pyrogram.types.Message.reply_sticker`, :meth:`~pyrogram.types.Message.reply_venue`, :meth:`~pyrogram.types.Message.reply_video`, :meth:`~pyrogram.types.Message.reply_video_note`, :meth:`~pyrogram.types.Message.reply_voice`, :meth:`~pyrogram.types.Message.reply_invoice`, :meth:`~pyrogram.types.Message.forward`, :meth:`~pyrogram.types.Message.copy`, :meth:`~pyrogram.types.Message.reply_cached_media`.
+- Introduced the ability to add media to existing text messages using the method :meth:`~pyrogram.Client.edit_message_media`, :meth:`~pyrogram.Client.edit_cached_media`, :meth:`~pyrogram.types.Message.edit_media`, :meth:`~pyrogram.types.Message.edit_cached_media`.
+- Added the class :obj:`~pyrogram.types.CopyTextButton` and the field ``copy_text`` in the class :obj:`~pyrogram.types.InlineKeyboardButton` allowing bots to send and receive inline buttons that copy arbitrary text.
+- View `new and changed <https://telegramplayground.github.io/TG-APIs/TL/diff/tdlib.html?from=190&to=192>`__ `raw API methods <https://telegramplayground.github.io/TG-APIs/TL/diff/tdesktop.html?from=190&to=192>`__.
 
 +------------------------+
 | Scheme layer used: 190 |
@@ -26,7 +44,6 @@ If you found any issue or have any suggestions, feel free to make `an issue <htt
 - Added :meth:`~pyrogram.types.Message.star` bound method to the :obj:`~pyrogram.types.Message`.
 - Added the field ``alternative_videos`` to the :obj:`~pyrogram.types.Message`.
 - Added the fields ``connected_website`` and ``write_access_allowed`` to the :obj:`~pyrogram.types.Message`.
-- Add ``copy_text`` to :obj:`~pyrogram.types.InlineKeyboardButton`.
 - Fix ``chat`` being None in some cases in the :obj:`~pyrogram.types.Message`.
 - Fix deleting messages does not return the count in some cases.
 - View `new and changed <https://telegramplayground.github.io/TG-APIs/TL/diff/tdlib.html?from=187&to=189>`__ `raw API methods <https://telegramplayground.github.io/TG-APIs/TL/diff/tdesktop.html?from=187&to=189>`__.
@@ -206,7 +223,6 @@ If you found any issue or have any suggestions, feel free to make `an issue <htt
 - Added support for ``https://t.me/m/blah`` links in the ``link`` parameter of :meth:`~pyrogram.Client.get_messages`
 - Added the parameter ``message_thread_id`` to the :meth:`~pyrogram.Client.search_messages` and :meth:`~pyrogram.Client.search_messages_count`.
 - Added the parameter ``chat_list`` to :meth:`~pyrogram.Client.search_global` and :meth:`~pyrogram.Client.search_global_count`.
-- PR from upstream: `1411 <https://github.com/pyrogram/pyrogram/pull/1411>`_ without attribution.
 - **BOTS ONLY**: Handled the parameter ``business_connection_id`` to the update handlers :obj:`~pyrogram.handlers.MessageHandler`, :obj:`~pyrogram.handlers.EditedMessageHandler`, :obj:`~pyrogram.handlers.DeletedMessagesHandler`.
 - Added the field ``business_connection_id`` to the class :obj:`~pyrogram.types.Message`.
 - Bug fix for the ``users_shared``, ``chat_shared`` logic in :obj:`~pyrogram.types.Message`.
