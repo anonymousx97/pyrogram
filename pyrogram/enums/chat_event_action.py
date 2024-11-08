@@ -48,6 +48,9 @@ class ChatEventAction(AutoName):
     USERNAME_CHANGED = auto()
     "the chat username has been changed (see ``old_username`` and ``new_username``)"
 
+    USERNAMES_CHANGED = auto()
+    "the chat username has been changed (see ``old_usernames`` and ``new_usernames``)"
+
     CHAT_PERMISSIONS_CHANGED = auto()
     "the default chat permissions has been changed (see ``old_chat_permissions`` and ``new_chat_permissions``)"
 
@@ -75,8 +78,11 @@ class ChatEventAction(AutoName):
     MEMBER_JOINED = auto()
     "a member joined by themselves. (see ``user``)"
 
-    # MEMBER_JOINED_BY_LINK = auto()
-    ""
+    MEMBER_JOINED_BY_LINK = auto()
+    "a new member joined the chat via an invite link (see ``invite_link``)"
+
+    MEMBER_JOINED_BY_REQUEST = auto()
+    "a new member was accepted to the chat by an administrator (see ``invite_link`` and ``approver_user``)"
 
     MEMBER_LEFT = auto()
     "a member left by themselves. (see ``user``)"
@@ -122,6 +128,21 @@ class ChatEventAction(AutoName):
 
     MESSAGE_UNPINNED = auto()
     "a message has been unpinned (see ``unpinned_message``)"
+
+    MEMBER_SUBSCRIPTION_EXTENDED = auto()
+    "A chat member extended their subscription to the chat (``old_chat_member`` and ``new_chat_member``)"
+
+    SHOW_MESSAGE_SENDER_ENABLED = auto()
+    "the show message senders have been enabled or disabled (see ``show_message_sender_enabled``)"
+
+    AGGRESSIVE_ANTI_SPAM_TOGGLED = auto()
+    "The ``has_aggressive_anti_spam_enabled`` setting of a supergroup was toggled. (see ``has_aggressive_anti_spam_enabled``)"
+
+    PROTECTED_CONTENT_TOGGLED = auto()
+    "The ``has_protected_content`` setting of a channel was toggled (see ``has_protected_content``)"
+
+    CHAT_IS_FORUM_TOGGLED = auto()
+    "The ``is_forum`` setting of a channel was toggled. (see ``is_forum``)"
 
     UNKNOWN = auto()
     "Unknown chat event action"
