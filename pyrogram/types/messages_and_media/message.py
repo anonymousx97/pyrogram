@@ -16,7 +16,6 @@
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
-import io
 import logging
 from datetime import datetime
 from functools import partial
@@ -5291,7 +5290,7 @@ class Message(Object, Update):
         block: bool = True,
         progress: Callable = None,
         progress_args: tuple = ()
-    ) -> str | io.BytesIO:
+    ) -> str | BinaryIO:
         """Bound method *download* of :obj:`~pyrogram.types.Message`.
 
         Use as a shortcut for:
