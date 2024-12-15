@@ -19,7 +19,7 @@
 from typing import Union
 
 import pyrogram
-from pyrogram import raw
+from pyrogram import raw, utils
 
 
 class SetAdministratorTitle:
@@ -56,6 +56,8 @@ class SetAdministratorTitle:
 
                 await app.set_administrator_title(chat_id, user_id, "Admin Title")
         """
+        utils.check_valid_length(text=title, arg_type="title", max_length=utils.MAX_ADMIN_RANK_LEN)
+
         chat_id = await self.resolve_peer(chat_id)
         user_id = await self.resolve_peer(user_id)
 

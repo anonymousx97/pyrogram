@@ -245,6 +245,23 @@ MIN_CHAT_ID = -999999999999
 MAX_USER_ID_OLD = 2147483647
 MAX_USER_ID = 999999999999
 
+MAX_CAPTION_LEN = 1024
+MAX_PREMIUM_CAPTION_LEN = 4096
+MAX_USER_BIO_LEN = 70
+MAX_PREMIUM_USER_BIO_LEN = 140
+MAX_MESSAGE_TEXT_LEN = 4096
+MAX_ADMIN_RANK_LEN = 16
+
+
+def check_valid_length(text: str, arg_type: str, max_length: int):
+    if not isinstance(text, str):
+        raise ValueError(f"Argument {arg_type} must be a str")
+
+    text_length = len(text)
+
+    assert bool(0 < text_length <= max_length), \
+        f"Invalid length of {text_length} for arg {arg_type}\nValid Lengths: 1-{max_length}"
+
 
 def get_raw_peer_id(peer: raw.base.Peer) -> Optional[int]:
     """Get the raw peer id from a Peer object"""

@@ -153,6 +153,9 @@ class SendMessage:
                             [InlineKeyboardButton("Docs", url="https://docs.pyrogram.org")]
                         ]))
         """
+
+        utils.check_valid_length(text=text, arg_type="text", max_length=utils.MAX_MESSAGE_TEXT_LEN)
+
         if disable_web_page_preview and link_preview_options:
             raise ValueError(
                 "Parameters `disable_web_page_preview` and `link_preview_options` are mutually "

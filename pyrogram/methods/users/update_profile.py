@@ -17,16 +17,16 @@
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
 import pyrogram
-from pyrogram import raw
+from pyrogram import raw, utils
 
 
 class UpdateProfile:
     async def update_profile(
-        self: "pyrogram.Client",
-        *,
-        first_name: str = None,
-        last_name: str = None,
-        bio: str = None
+            self: "pyrogram.Client",
+            *,
+            first_name: str = None,
+            last_name: str = None,
+            bio: str = None
     ) -> bool:
         """Update your profile details such as first name, last name and bio.
 
@@ -62,6 +62,9 @@ class UpdateProfile:
                 # Remove the last name
                 await app.update_profile(last_name="")
         """
+        if bio:
+            utils.check_valid_length(text=bio, arg_type="bio",
+                                     max_length=utils.MAX_PREMIUM_USER_BIO_LEN if self.me.is_premium else utils.MAX_USER_BIO_LEN)
 
         return bool(
             await self.invoke(
