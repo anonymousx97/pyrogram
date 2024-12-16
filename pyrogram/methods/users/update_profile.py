@@ -63,8 +63,16 @@ class UpdateProfile:
                 await app.update_profile(last_name="")
         """
         if bio:
-            utils.check_valid_length(text=bio, arg_type="bio",
-                                     max_length=utils.MAX_PREMIUM_USER_BIO_LEN if self.me.is_premium else utils.MAX_USER_BIO_LEN)
+            cc = utils.Constants()
+            cc.check_valid_length(
+                text=bio,
+                arg_type="bio",
+                max_length=(
+                    "MAX_PREMIUM_USER_BIO_LEN"
+                    if self.me and self.me.is_premium
+                    else "MAX_USER_BIO_LEN"
+                )
+            )
 
         return bool(
             await self.invoke(

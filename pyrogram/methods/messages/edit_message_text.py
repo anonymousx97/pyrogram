@@ -95,7 +95,12 @@ class EditMessageText:
                 )
         """
 
-        utils.check_valid_length(text=text, arg_type="text", max_length=utils.MAX_MESSAGE_TEXT_LEN)
+        message, entities = (await utils.parse_text_entities(self, text, parse_mode, entities)).values()
+
+        if message:
+            cc = utils.Constants()
+            # TODO
+            cc.check_valid_length(text=message, arg_type="text", max_length="MAX_MESSAGE_TEXT_LEN")
 
         if disable_web_page_preview and link_preview_options:
             raise ValueError(
@@ -132,7 +137,8 @@ class EditMessageText:
             media=media,
             reply_markup=await reply_markup.write(self) if reply_markup else None,
             schedule_date=utils.datetime_to_timestamp(schedule_date),
-            **await utils.parse_text_entities(self, text, parse_mode, entities)
+            message=message,
+            entities=entities
         )
         session = None
         business_connection = None

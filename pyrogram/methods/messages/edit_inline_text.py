@@ -81,7 +81,12 @@ class EditInlineText:
                 )
         """
 
-        utils.check_valid_length(text=text, arg_type="text", max_length=utils.MAX_MESSAGE_TEXT_LEN)
+        message, entities = (await utils.parse_text_entities(self, text, parse_mode, entities)).values()
+
+        if message:
+            cc = utils.Constants()
+            # TODO
+            cc.check_valid_length(text=message, arg_type="text", max_length="MAX_MESSAGE_TEXT_LEN")
 
         if disable_web_page_preview and link_preview_options:
             raise ValueError(
@@ -109,7 +114,8 @@ class EditInlineText:
                 no_webpage=link_preview_options.is_disabled if link_preview_options else None,
                 invert_media=link_preview_options.show_above_text if link_preview_options else None,
                 reply_markup=await reply_markup.write(self) if reply_markup else None,
-                **await utils.parse_text_entities(self, text, parse_mode, entities)
+                message=message,
+                entities=entities
             ),
             sleep_threshold=self.sleep_threshold
         )

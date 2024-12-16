@@ -85,16 +85,6 @@ class EditMessageCaption:
                 show_above_text=show_caption_above_media
             )
 
-        pyrogram.utils.check_valid_length(
-            text=caption,
-            arg_type="caption",
-            max_length=(
-                utils.MAX_PREMIUM_CAPTION_LEN
-                if self.me.is_premium
-                else utils.MAX_CAPTION_LEN
-            ),
-        )
-
         return await self.edit_message_text(
             chat_id=chat_id,
             message_id=message_id,

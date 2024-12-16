@@ -245,23 +245,6 @@ MIN_CHAT_ID = -999999999999
 MAX_USER_ID_OLD = 2147483647
 MAX_USER_ID = 999999999999
 
-MAX_CAPTION_LEN = 1024
-MAX_PREMIUM_CAPTION_LEN = 4096
-MAX_USER_BIO_LEN = 70
-MAX_PREMIUM_USER_BIO_LEN = 140
-MAX_MESSAGE_TEXT_LEN = 4096
-MAX_ADMIN_RANK_LEN = 16
-
-
-def check_valid_length(text: str, arg_type: str, max_length: int):
-    if not isinstance(text, str):
-        raise ValueError(f"Argument {arg_type} must be a str")
-
-    text_length = len(text)
-
-    assert bool(0 < text_length <= max_length), \
-        f"Invalid length of {text_length} for arg {arg_type}\nValid Lengths: 1-{max_length}"
-
 
 def get_raw_peer_id(peer: raw.base.Peer) -> Optional[int]:
     """Get the raw peer id from a Peer object"""
@@ -609,3 +592,29 @@ def fix_up_voice_audio_uri(
         mime_type = "audio/ogg"
     # BEWARE: https://t.me/c/1279877202/74
     return mime_type
+
+
+class Constants:
+    # TODO: https://github.com/pyrogram/pyrogram/pull/323#issuecomment-629629992
+    # Text of the message to be sent, 1-4096 characters
+    MAX_MESSAGE_TEXT_LEN = 4096
+
+    # Caption for the animation, audio, document, photo, video or voice, 0-1024 characters
+    MAX_CAPTION_LEN = 1024
+    MAX_PREMIUM_CAPTION_LEN = 2048
+
+    MAX_USER_BIO_LEN = 70
+    MAX_PREMIUM_USER_BIO_LEN = 140
+
+    MAX_ADMIN_RANK_LEN = 16
+
+
+    def check_valid_length(self, text: str, arg_type: str, max_length_tye: str):
+        if not isinstance(text, str):
+            raise ValueError(f"Argument {arg_type} must be a str")
+
+        text_length = len(text)
+        max_length = getattr(self, max_length_tye, 0)  # TODO
+
+        assert bool(0 < text_length <= max_length), \
+            f"Invalid length of {text_length} for arg {arg_type}\nValid Lengths: 1-{max_length}"

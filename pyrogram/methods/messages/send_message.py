@@ -154,8 +154,6 @@ class SendMessage:
                         ]))
         """
 
-        utils.check_valid_length(text=text, arg_type="text", max_length=utils.MAX_MESSAGE_TEXT_LEN)
-
         if disable_web_page_preview and link_preview_options:
             raise ValueError(
                 "Parameters `disable_web_page_preview` and `link_preview_options` are mutually "
@@ -190,6 +188,10 @@ class SendMessage:
             reply_parameters
         )
         message, entities = (await utils.parse_text_entities(self, text, parse_mode, entities)).values()
+
+        if message:
+            cc = utils.Constants()
+            cc.check_valid_length(text=message, arg_type="text", max_length="MAX_MESSAGE_TEXT_LEN")
 
         session = None
         business_connection = None

@@ -71,8 +71,6 @@ class EditInlineCaption:
                 show_above_text=show_caption_above_media
             )
 
-        utils.check_valid_length(text=caption, arg_type="caption", max_length=utils.MAX_CAPTION_LEN)
-
         return await self.edit_inline_text(
             inline_message_id=inline_message_id,
             text=caption,

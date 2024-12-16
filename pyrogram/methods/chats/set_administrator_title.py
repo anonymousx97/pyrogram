@@ -16,7 +16,7 @@
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Union
+from typing import Optional, Union
 
 import pyrogram
 from pyrogram import raw, utils
@@ -27,7 +27,7 @@ class SetAdministratorTitle:
         self: "pyrogram.Client",
         chat_id: Union[int, str],
         user_id: Union[int, str],
-        title: str,
+        title: Optional[str] = None,
     ) -> bool:
         """Set a custom title (rank) to an administrator of a supergroup.
 
@@ -56,7 +56,10 @@ class SetAdministratorTitle:
 
                 await app.set_administrator_title(chat_id, user_id, "Admin Title")
         """
-        utils.check_valid_length(text=title, arg_type="title", max_length=utils.MAX_ADMIN_RANK_LEN)
+
+        if title:
+            cc = utils.Constants()
+            cc.check_valid_length(text=title, arg_type="title", max_length="MAX_ADMIN_RANK_LEN")
 
         chat_id = await self.resolve_peer(chat_id)
         user_id = await self.resolve_peer(user_id)
