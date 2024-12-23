@@ -125,7 +125,7 @@ class Session:
                 await self.send(raw.functions.Ping(ping_id=0), timeout=self.START_TIMEOUT)
 
                 if not self.is_cdn:
-                    await self.send(
+                    cfg = await self.send(
                         raw.functions.InvokeWithLayer(
                             layer=layer,
                             query=raw.functions.InitConnection(
@@ -146,6 +146,9 @@ class Session:
                         ),
                         timeout=self.START_TIMEOUT
                     )
+                    if isinstance(cfg, raw.types.Config):  # TODO
+                        pyrogram.utils.Constants.MAX_MESSAGE_TEXT_LEN = cfg.message_length_max
+                        pyrogram.utils.Constants.MAX_CAPTION_LEN = cfg.caption_length_max
 
                 self.ping_task = self.loop.create_task(self.ping_worker())
 
