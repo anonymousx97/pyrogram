@@ -80,7 +80,6 @@ class EditInlineText:
                     )
                 )
         """
-
         if disable_web_page_preview and link_preview_options:
             raise ValueError(
                 "Parameters `disable_web_page_preview` and `link_preview_options` are mutually "
