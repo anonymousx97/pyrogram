@@ -1256,17 +1256,33 @@ class Constant:
 
     MAX_ADMIN_RANK_LENGTH = (0, 16)
 
+    # Use the InlineQuery.answer() method. No more than 50 results per query are allowed.
+    MAX_INLINE_QUERY_RESULTS = (0, 50)
 
     def __init__(self):
         super().__init__()
 
 
-    def check_valid_length(self, text: str, arg_type: str, max_length_tye: str):
-        if not isinstance(text, str):
-            raise ValueError(f"Argument {arg_type} must be a str")
+    def check_valid_length(
+        self,
+        text: Union[List, str],
+        arg_type: str,
+        max_length_tye: str
+    ):
+        if not (
+            isinstance(text, str) or
+            isinstance(text, list)
+        ):
+            raise ValueError(f"Argument {arg_type} must be a str | list")
 
         text_length = len(text)
         max_length = getattr(self, max_length_tye, (0, 0))
 
-        assert bool(max_length[0] < text_length <= max_length[1]), \
-            f"Invalid length of {text_length} for arg {arg_type}\nValid Lengths: {max_length[0]}-{max_length[1]}"
+        assert (
+            bool(max_length[0] < text_length <= max_length[1]),
+            (
+                f"Invalid length of {text_length} for arg {arg_type}\n"
+                f"Valid Lengths: {max_length[0]}-{max_length[1]}"
+            )
+        )
+

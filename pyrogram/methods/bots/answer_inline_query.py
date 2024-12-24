@@ -96,6 +96,8 @@ class AnswerInlineQuery:
                             InputTextMessageContent("Message content"))])
         """
 
+        self.app_constant.check_valid_length(text=results, arg_type="results", max_length_tye="MAX_INLINE_QUERY_RESULTS")
+
         return await self.invoke(
             raw.functions.messages.SetInlineBotResults(
                 query_id=int(inline_query_id),
