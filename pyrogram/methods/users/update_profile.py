@@ -66,7 +66,7 @@ class UpdateProfile:
             self.app_constant.check_valid_length(
                 text=bio,
                 arg_type="bio",
-                max_length=(
+                max_length_tye=(
                     "MAX_PREMIUM_USERBIO_LENGTH"
                     if self.me and self.me.is_premium
                     else "MAX_USERBIO_LENGTH"

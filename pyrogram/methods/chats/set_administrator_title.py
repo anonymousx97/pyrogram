@@ -45,6 +45,7 @@ class SetAdministratorTitle:
                 For a contact that exists in your Telegram address book you can use his phone number (str).
 
             title (``str``, *optional*):
+                New custom title for the administrator; 0-16 characters, emoji are not allowed.
                 A custom title that will be shown to all members instead of "Owner" or "Admin".
                 Pass None or "" (empty string) to remove the custom title.
 
@@ -58,7 +59,7 @@ class SetAdministratorTitle:
         """
 
         if title:
-            self.app_constant.check_valid_length(text=title, arg_type="title", max_length="MAX_ADMIN_RANK_LENGTH")
+            self.app_constant.check_valid_length(text=title, arg_type="title", max_length_tye="MAX_ADMIN_RANK_LENGTH")
 
         chat_id = await self.resolve_peer(chat_id)
         user_id = await self.resolve_peer(user_id)
