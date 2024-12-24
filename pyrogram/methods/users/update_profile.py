@@ -63,14 +63,13 @@ class UpdateProfile:
                 await app.update_profile(last_name="")
         """
         if bio:
-            cc = utils.Constants()
-            cc.check_valid_length(
+            self.app_constant.check_valid_length(
                 text=bio,
                 arg_type="bio",
                 max_length=(
-                    "MAX_PREMIUM_USER_BIO_LEN"
+                    "MAX_PREMIUM_USERBIO_LENGTH"
                     if self.me and self.me.is_premium
-                    else "MAX_USER_BIO_LEN"
+                    else "MAX_USERBIO_LENGTH"
                 )
             )
 

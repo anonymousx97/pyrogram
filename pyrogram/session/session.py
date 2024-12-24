@@ -147,8 +147,8 @@ class Session:
                         timeout=self.START_TIMEOUT
                     )
                     if isinstance(cfg, raw.types.Config):  # TODO
-                        pyrogram.utils.Constants.MAX_MESSAGE_TEXT_LEN = cfg.message_length_max
-                        pyrogram.utils.Constants.MAX_CAPTION_LEN = cfg.caption_length_max
+                        self.client.app_constant.MAX_MESSAGE_LENGTH[1] = cfg.message_length_max
+                        self.client.app_constant.MAX_CAPTION_LENGTH[1] = cfg.caption_length_max
 
                 self.ping_task = self.loop.create_task(self.ping_worker())
 

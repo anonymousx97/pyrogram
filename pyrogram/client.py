@@ -362,6 +362,8 @@ class Client(Methods):
         self.message_cache = Cache(self.max_message_cache_size)
         self.business_user_connection_cache = Cache(self.max_business_user_connection_cache_size)
 
+        self.app_constant = Constant()
+
         # Sometimes, for some reason, the server will stop sending updates and will only respond to pings.
         # This watchdog will invoke updates.GetState in order to wake up the server and enable it sending updates again
         # after some idle time has been detected.
@@ -1240,3 +1242,31 @@ class Cache:
         if len(self.store) > self.capacity:
             for _ in range(self.capacity // 2 + 1):
                 del self.store[next(iter(self.store))]
+
+
+class Constant:
+    # Text of the message to be sent, 1-4096 characters
+    MAX_MESSAGE_LENGTH = (1, 4096)
+
+    # Caption for the animation, audio, document, photo, video or voice, 0-1024 characters
+    MAX_CAPTION_LENGTH = (0, 1024)
+
+    MAX_USERBIO_LENGTH = (0, 70)
+    MAX_PREMIUM_USERBIO_LENGTH = (0, 140)
+
+    MAX_ADMIN_RANK_LENGTH = (0, 16)
+
+
+    def __init__(self):
+        super().__init__()
+
+
+    def check_valid_length(self, text: str, arg_type: str, max_length_tye: str):
+        if not isinstance(text, str):
+            raise ValueError(f"Argument {arg_type} must be a str")
+
+        text_length = len(text)
+        max_length = getattr(self, max_length_tye, (0, 0))
+
+        assert bool(max_length[0] < text_length <= max_length[1]), \
+            f"Invalid length of {text_length} for arg {arg_type}\nValid Lengths: {max_length[0]}-{max_length[1]}"

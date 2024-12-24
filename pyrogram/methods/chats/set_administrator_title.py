@@ -58,8 +58,7 @@ class SetAdministratorTitle:
         """
 
         if title:
-            cc = utils.Constants()
-            cc.check_valid_length(text=title, arg_type="title", max_length="MAX_ADMIN_RANK_LEN")
+            self.app_constant.check_valid_length(text=title, arg_type="title", max_length="MAX_ADMIN_RANK_LENGTH")
 
         chat_id = await self.resolve_peer(chat_id)
         user_id = await self.resolve_peer(user_id)
