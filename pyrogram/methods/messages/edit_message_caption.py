@@ -20,7 +20,7 @@ from datetime import datetime
 from typing import Union, List, Optional
 
 import pyrogram
-from pyrogram import types, enums, utils
+from pyrogram import types, enums
 
 
 class EditMessageCaption:

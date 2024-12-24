@@ -1251,6 +1251,8 @@ class Constant:
     # Caption for the animation, audio, document, photo, video or voice, 0-1024 characters
     MAX_CAPTION_LENGTH = (0, 1024)
 
+    MAX_USER_FIRSTNAME_LENGTH = (1, 64)
+    MAX_USER_LASTNAME_LENGTH = (0, 64)
     MAX_USERBIO_LENGTH = (0, 70)
     MAX_PREMIUM_USERBIO_LENGTH = (0, 140)
 

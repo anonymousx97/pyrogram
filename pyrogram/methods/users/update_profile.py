@@ -22,11 +22,11 @@ from pyrogram import raw, utils
 
 class UpdateProfile:
     async def update_profile(
-            self: "pyrogram.Client",
-            *,
-            first_name: str = None,
-            last_name: str = None,
-            bio: str = None
+        self: "pyrogram.Client",
+        *,
+        first_name: str = None,
+        last_name: str = None,
+        bio: str = None
     ) -> bool:
         """Update your profile details such as first name, last name and bio.
 
@@ -62,6 +62,21 @@ class UpdateProfile:
                 # Remove the last name
                 await app.update_profile(last_name="")
         """
+
+        if first_name:
+            self.app_constant.check_valid_length(
+                text=first_name,
+                arg_type="first_name",
+                max_length_tye="MAX_USER_FIRSTNAME_LENGTH"
+            )
+
+        if last_name:
+            self.app_constant.check_valid_length(
+                text=last_name,
+                arg_type="last_name",
+                max_length_tye="MAX_USER_LASTNAME_LENGTH"
+            )
+
         if bio:
             self.app_constant.check_valid_length(
                 text=bio,

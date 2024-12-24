@@ -95,11 +95,6 @@ class EditMessageText:
                 )
         """
 
-        message, entities = (await utils.parse_text_entities(self, text, parse_mode, entities)).values()
-
-        if message:
-            self.app_constant.check_valid_length(text=message, arg_type="text", max_length_tye="MAX_MESSAGE_LENGTH")
-
         if disable_web_page_preview and link_preview_options:
             raise ValueError(
                 "Parameters `disable_web_page_preview` and `link_preview_options` are mutually "
@@ -135,8 +130,7 @@ class EditMessageText:
             media=media,
             reply_markup=await reply_markup.write(self) if reply_markup else None,
             schedule_date=utils.datetime_to_timestamp(schedule_date),
-            message=message,
-            entities=entities
+            **await utils.parse_text_entities(self, text, parse_mode, entities)
         )
         session = None
         business_connection = None
