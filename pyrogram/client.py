@@ -1248,22 +1248,22 @@ class Constant:
     """Tuple of min, max, premium max lengths"""
 
     # Text of the message to be sent, 1-4096 characters
-    _MAX_TEXT_LENGTH = (1, 4096, 0)
+    MAX_TEXT_LENGTH = (1, 4096, 0)
 
     # Caption for the animation, audio, document, photo, video or voice, 0-1024 characters
-    _MAX_CAPTION_LENGTH = (0, 1024, 0)
+    MAX_CAPTION_LENGTH = (0, 1024, 0)
 
-    _MAX_FIRST_NAME_LENGTH = (1, 64, 0)
-    _MAX_LAST_NAME_LENGTH = (0, 64, 0)
+    MAX_FIRST_NAME_LENGTH = (1, 64, 0)
+    MAX_LAST_NAME_LENGTH = (0, 64, 0)
 
     # USER's BIO
-    _MAX_BIO_LENGTH = (0, 70, 140)
+    MAX_BIO_LENGTH = (0, 70, 140)
 
     # ADMIN TITLE
-    _MAX_TITLE_LENGTH = (0, 16, 0)
+    MAX_TITLE_LENGTH = (0, 16, 0)
 
     # Use the InlineQuery.answer() method. No more than 50 results per query are allowed.
-    _MAX_RESULTS_LENGTH = (0, 50, 0)
+    MAX_RESULTS_LENGTH = (0, 50, 0)
 
     def __init__(self, client_instance: Client):
         self.is_premium = client_instance.me.is_premium
@@ -1274,7 +1274,7 @@ class Constant:
 
         text_length = len(text)
 
-        attr_str = f"_max{arg_type}_length".upper()
+        attr_str = f"max_{arg_type}_length".upper()
 
         # MIN, MAX, PREM-MAX
         lengths: tuple[int, int, int] = getattr(self, attr_str, (0, 0, 0))

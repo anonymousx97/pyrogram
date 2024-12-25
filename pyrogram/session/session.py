@@ -147,8 +147,8 @@ class Session:
                         timeout=self.START_TIMEOUT
                     )
                     if isinstance(cfg, raw.types.Config):  # TODO
-                        self.client.app_constant.MAX_MESSAGE_LENGTH = (1, cfg.message_length_max)
-                        self.client.app_constant.MAX_CAPTION_LENGTH = (0, cfg.caption_length_max)
+                        self.client.app_constant.MAX_TEXT_LENGTH = (1, cfg.message_length_max, cfg.message_length_max)
+                        self.client.app_constant.MAX_CAPTION_LENGTH = (0, cfg.caption_length_max, cfg.caption_length_max)
 
                 self.ping_task = self.loop.create_task(self.ping_worker())
 
