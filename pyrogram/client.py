@@ -362,7 +362,7 @@ class Client(Methods):
         self.message_cache = Cache(self.max_message_cache_size)
         self.business_user_connection_cache = Cache(self.max_business_user_connection_cache_size)
 
-        self.app_constant = Constant()
+        self.app_constant = Constant(client_instance=self)
 
         # Sometimes, for some reason, the server will stop sending updates and will only respond to pings.
         # This watchdog will invoke updates.GetState in order to wake up the server and enable it sending updates again
@@ -1245,46 +1245,44 @@ class Cache:
 
 
 class Constant:
+    """Tuple of min, max, premium max lengths"""
+
     # Text of the message to be sent, 1-4096 characters
-    MAX_MESSAGE_LENGTH = (1, 4096)
+    _MAX_TEXT_LENGTH = (1, 4096, 0)
 
     # Caption for the animation, audio, document, photo, video or voice, 0-1024 characters
-    MAX_CAPTION_LENGTH = (0, 1024)
+    _MAX_CAPTION_LENGTH = (0, 1024, 0)
 
-    MAX_USER_FIRSTNAME_LENGTH = (1, 64)
-    MAX_USER_LASTNAME_LENGTH = (0, 64)
-    MAX_USERBIO_LENGTH = (0, 70)
-    MAX_PREMIUM_USERBIO_LENGTH = (0, 140)
+    _MAX_FIRST_NAME_LENGTH = (1, 64, 0)
+    _MAX_LAST_NAME_LENGTH = (0, 64, 0)
 
-    MAX_ADMIN_RANK_LENGTH = (0, 16)
+    # USER's BIO
+    _MAX_BIO_LENGTH = (0, 70, 140)
+
+    # ADMIN TITLE
+    _MAX_TITLE_LENGTH = (0, 16, 0)
 
     # Use the InlineQuery.answer() method. No more than 50 results per query are allowed.
-    MAX_INLINE_QUERY_RESULTS = (0, 50)
+    _MAX_RESULTS_LENGTH = (0, 50, 0)
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, client_instance: Client):
+        self.is_premium = client_instance.me.is_premium
 
-
-    def check_valid_length(
-        self,
-        text: Union[List, str],
-        arg_type: str,
-        max_length_tye: str
-    ):
-        if not (
-            isinstance(text, str) or
-            isinstance(text, list)
-        ):
+    def check_valid_length(self, text: Union[List, str], arg_type: str, ):
+        if not isinstance(text, (str, list)):
             raise ValueError(f"Argument {arg_type} must be a str | list")
 
         text_length = len(text)
-        max_length = getattr(self, max_length_tye, (0, 0))
 
-        assert (
-            bool(max_length[0] < text_length <= max_length[1]),
-            (
-                f"Invalid length of {text_length} for arg {arg_type}\n"
-                f"Valid Lengths: {max_length[0]}-{max_length[1]}"
-            )
-        )
+        attr_str = f"_max{arg_type}_length".upper()
 
+        # MIN, MAX, PREM-MAX
+        lengths: tuple[int, int, int] = getattr(self, attr_str, (0, 0, 0))
+
+        min_length = lengths[0]
+        # Check if client is premium and the premium value isn't 0
+        max_length = lengths[2] if self.is_premium and lengths[2] != 0 else lengths[1]
+
+        error_info = f"\nInvalid length of {text_length} for arg {arg_type}\nValid Lengths: {min_length}-{max_length}"
+
+        assert bool(min_length < text_length <= max_length), error_info

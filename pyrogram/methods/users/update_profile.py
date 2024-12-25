@@ -63,30 +63,9 @@ class UpdateProfile:
                 await app.update_profile(last_name="")
         """
 
-        if first_name:
-            self.app_constant.check_valid_length(
-                text=first_name,
-                arg_type="first_name",
-                max_length_tye="MAX_USER_FIRSTNAME_LENGTH"
-            )
-
-        if last_name:
-            self.app_constant.check_valid_length(
-                text=last_name,
-                arg_type="last_name",
-                max_length_tye="MAX_USER_LASTNAME_LENGTH"
-            )
-
-        if bio:
-            self.app_constant.check_valid_length(
-                text=bio,
-                arg_type="bio",
-                max_length_tye=(
-                    "MAX_PREMIUM_USERBIO_LENGTH"
-                    if self.me and self.me.is_premium
-                    else "MAX_USERBIO_LENGTH"
-                )
-            )
+        for var_name in ("first_name", "last_name", "bio"):
+            if var_value := locals()[var_name]:
+                self.app_constant.check_valid_length(text=var_value, arg_type=var_name)
 
         return bool(
             await self.invoke(
