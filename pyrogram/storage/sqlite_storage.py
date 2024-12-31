@@ -26,7 +26,7 @@ import inspect
 import sqlite3
 import time
 from concurrent.futures import ThreadPoolExecutor
-from typing import List, Tuple, Any
+from typing import Tuple, Any
 
 from pyrogram import raw
 from .storage import Storage
@@ -182,7 +182,7 @@ class SQLiteStorage(Storage):
                     usernames_data
                 )
 
-    async def update_peers(self, peers: List[Tuple[int, int, str, List[str], str]]):
+    async def update_peers(self, peers: list[Tuple[int, int, str, list[str], str]]):
         return await self.loop.run_in_executor(self.executor, self._update_peers_impl, peers)
 
     def _update_state_impl(self, value: Tuple[int, int, int, int, int] = object):

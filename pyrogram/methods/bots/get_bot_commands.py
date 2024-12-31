@@ -16,7 +16,7 @@
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import List
+from typing import list
 
 import pyrogram
 from pyrogram import raw, types
@@ -27,7 +27,7 @@ class GetBotCommands:
         self: "pyrogram.Client",
         scope: "types.BotCommandScope" = types.BotCommandScopeDefault(),
         language_code: str = "",
-    ) -> List["types.BotCommand"]:
+    ) -> list["types.BotCommand"]:
         """Get the current list of the bot's commands for the given scope and user language.
         Returns Array of BotCommand on success. If commands aren't set, an empty list is returned.
 

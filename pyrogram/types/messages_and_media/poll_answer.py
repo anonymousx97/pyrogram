@@ -16,7 +16,7 @@
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import List, Optional
+from typing import Optional
 
 import pyrogram
 from pyrogram import enums, raw, types, utils
@@ -38,7 +38,7 @@ class PollAnswer(Object, Update):
         user (:obj:`~pyrogram.types.User`, *optional*):
             The user that changed the answer to the poll, if the voter isn't anonymous.
 
-        option_ids (List of ``int``):
+        option_ids (list of ``int``):
             0-based identifiers of chosen answer options. May be empty if the vote was retracted.
 
     """
@@ -48,7 +48,7 @@ class PollAnswer(Object, Update):
         *,
         client: "pyrogram.Client" = None,
         poll_id: str,
-        option_ids: List[int],
+        option_ids: list[int],
         user: Optional["types.User"] = None,
         voter_chat: Optional["types.Chat"] = None,
     ):

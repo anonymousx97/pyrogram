@@ -16,7 +16,7 @@
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Union, List
+from typing import Union, list
 
 import pyrogram
 from pyrogram import raw, types
@@ -26,9 +26,9 @@ class AddChatMembers:
     async def add_chat_members(
         self: "pyrogram.Client",
         chat_id: Union[int, str],
-        user_ids: Union[Union[int, str], List[Union[int, str]]],
+        user_ids: Union[Union[int, str], list[Union[int, str]]],
         forward_limit: int = 100
-    ) -> Union[List["types.Message"], "types.Message", bool]:
+    ) -> Union[list["types.Message"], "types.Message", bool]:
         """Add new chat members to a group, supergroup or channel
 
         .. include:: /_includes/usable-by/users.rst
@@ -37,7 +37,7 @@ class AddChatMembers:
             chat_id (``int`` | ``str``):
                 The group, supergroup or channel id
 
-            user_ids (``int`` | ``str`` | List of ``int`` or ``str``):
+            user_ids (``int`` | ``str`` | list of ``int`` or ``str``):
                 Users to add in the chat
                 You can pass an ID (int), username (str) or phone number (str).
                 Multiple users can be added by passing a list of IDs, usernames or phone numbers.

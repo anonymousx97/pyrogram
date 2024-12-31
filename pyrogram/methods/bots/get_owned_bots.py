@@ -17,7 +17,7 @@
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from typing import List
+from typing import list
 import pyrogram
 from pyrogram import raw, types
 
@@ -25,7 +25,7 @@ from pyrogram import raw, types
 class GetOwnedBots:
     async def get_owned_bots(
         self: "pyrogram.Client",
-    ) -> List["types.User"]:
+    ) -> list["types.User"]:
         """Returns the list of bots owned by the current user.
 
         .. include:: /_includes/usable-by/users.rst

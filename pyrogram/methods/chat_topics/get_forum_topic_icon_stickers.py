@@ -16,7 +16,7 @@
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import List
+from typing import list
 
 import pyrogram
 from pyrogram import raw, types
@@ -25,7 +25,7 @@ from pyrogram import raw, types
 class GetForumTopicIconStickers:
     async def get_forum_topic_icon_stickers(
         self: "pyrogram.Client"
-    ) -> List["types.Sticker"]:
+    ) -> list["types.Sticker"]:
         """Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user.
 
         .. include:: /_includes/usable-by/users-bots.rst

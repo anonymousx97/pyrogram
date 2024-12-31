@@ -16,7 +16,7 @@
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import List
+from typing import list
 
 import pyrogram
 from pyrogram import raw
@@ -29,7 +29,7 @@ class GetNearbyChats:
         self: "pyrogram.Client",
         latitude: float,
         longitude: float
-    ) -> List["types.Chat"]:
+    ) -> list["types.Chat"]:
         """Returns a list of users and location-based supergroups nearby. The method was disabled and returns an empty list of chats now.
 
         .. include:: /_includes/usable-by/users.rst

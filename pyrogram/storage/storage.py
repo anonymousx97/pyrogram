@@ -24,7 +24,7 @@
 from abc import ABC, abstractmethod
 import base64
 import struct
-from typing import List, Tuple
+from typing import Tuple
 
 
 class Storage(ABC):
@@ -66,12 +66,12 @@ class Storage(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    async def update_peers(self, peers: List[Tuple[int, int, str, List[str], str]]):
+    async def update_peers(self, peers: list[Tuple[int, int, str, list[str], str]]):
         """
         Update the peers table with the provided information.
 
         Parameters:
-            peers (``List[Tuple[int, int, str, List[str], str]]``): A list of tuples containing the
+            peers (``list[Tuple[int, int, str, List[str], str]]``): A list of tuples containing the
                 information of the peers to be updated. Each tuple must contain the following
                 information:
                 - ``int``: The peer id.

@@ -16,7 +16,7 @@
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Union, List
+from typing import Union, list
 
 import pyrogram
 from pyrogram import raw
@@ -26,7 +26,7 @@ class ViewMessages:
     async def view_messages(
         self: "pyrogram.Client",
         chat_id: Union[int, str],
-        message_ids: Union[int, List[int]],
+        message_ids: Union[int, list[int]],
         force_read: bool = True
     ) -> bool:
         """Informs the server that messages are being viewed by the current user.
@@ -37,7 +37,7 @@ class ViewMessages:
             chat_id (``int`` | ``str``):
                 Unique identifier (int) or username (str) of the target chat.
 
-            message_ids (``int`` | List of ``int``):
+            message_ids (``int`` | list of ``int``):
                 Identifier or list of message identifiers of the target message.
 
             force_read (``bool``, *optional*):

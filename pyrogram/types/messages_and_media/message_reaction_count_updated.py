@@ -17,7 +17,7 @@
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
 from datetime import datetime
-from typing import Optional, Dict, List
+from typing import Optional, Dict, list
 
 import pyrogram
 from pyrogram import raw, types, utils
@@ -51,7 +51,7 @@ class MessageReactionCountUpdated(Object, Update):
         chat: "types.Chat",
         message_id: int,
         date: datetime,
-        reactions: List["types.ReactionCount"]
+        reactions: list["types.ReactionCount"]
     ):
         super().__init__(client)
 

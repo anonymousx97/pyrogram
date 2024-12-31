@@ -18,13 +18,13 @@
 
 from io import BytesIO
 from json import dumps
-from typing import cast, List, Any, Union, Dict
+from typing import cast, Any, Union, Dict
 
 from ..all import objects
 
 
 class TLObject:
-    __slots__: List[str] = []
+    __slots__: list[str] = []
 
     QUALNAME = "Base"
 

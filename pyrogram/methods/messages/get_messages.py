@@ -17,7 +17,7 @@
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
 import logging
-from typing import Union, List, Iterable
+from typing import Union, Iterable
 
 import pyrogram
 from pyrogram import raw, types, utils
@@ -41,7 +41,7 @@ class GetMessages:
         link: str = None,
     ) -> Union[
         "types.Message",
-        List["types.Message"],
+        list["types.Message"],
         "types.DraftMessage"
     ]:
         """Get one or more messages from a chat by using message identifiers. You can retrieve up to 200 messages at once.

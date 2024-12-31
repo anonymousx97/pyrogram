@@ -16,7 +16,7 @@
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import List
+from typing import list
 
 import pyrogram
 from pyrogram import types
@@ -39,7 +39,7 @@ class UsersShared(Object):
         self,
         *,
         request_id: int,
-        users: List["types.User"]
+        users: list["types.User"]
     ):
         super().__init__()
 

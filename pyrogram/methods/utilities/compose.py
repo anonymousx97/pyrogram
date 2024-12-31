@@ -17,14 +17,14 @@
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
 import asyncio
-from typing import List
+from typing import list
 
 import pyrogram
 from .idle import idle
 
 
 async def compose(
-    clients: List["pyrogram.Client"],
+    clients: list["pyrogram.Client"],
     sequential: bool = False
 ):
     """Run multiple clients at once.

@@ -17,7 +17,7 @@
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
 from random import choice
-from typing import List
+from typing import list
 
 from pyrogram import raw, types
 from ..object import Object
@@ -68,7 +68,7 @@ class GiftedPremium(Object):
         month_count: int = None,
         sticker: "types.Sticker" = None,
         caption: str = None,
-        caption_entities: List["types.MessageEntity"] = None
+        caption_entities: list["types.MessageEntity"] = None
     ):
         super().__init__()
 

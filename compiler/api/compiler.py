@@ -22,7 +22,7 @@ import re
 import shutil
 from functools import partial
 from pathlib import Path
-from typing import NamedTuple, List, Tuple
+from typing import NamedTuple, Tuple
 
 # from autoflake import fix_code
 # from black import format_str, FileMode
@@ -82,7 +82,7 @@ class Combinator(NamedTuple):
     name: str
     id: str
     has_flags: bool
-    args: List[Tuple[str, str]]
+    args: list[Tuple[str, str]]
     qualtype: str
     typespace: str
     type: str
