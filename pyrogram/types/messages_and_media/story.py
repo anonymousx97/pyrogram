@@ -16,8 +16,9 @@
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
+import io
 from datetime import datetime
-from typing import List, Union, Callable
+from typing import Callable, Optional, Union
 
 import pyrogram
 from pyrogram import raw, utils, types, enums
@@ -106,10 +107,10 @@ class Story(Object, Update):
         edited: bool = None,
         pinned: bool = None,
         caption: Str = None,
-        caption_entities: List["types.MessageEntity"] = None,
+        caption_entities: list["types.MessageEntity"] = None,
         views: int = None,
         forwards: int = None,
-        reactions: List["types.Reaction"] = None,
+        reactions: list["types.Reaction"] = None,
         skipped: bool = None,
         deleted: bool = None,
         _raw = None
@@ -411,7 +412,7 @@ class Story(Object, Update):
         """
         sr = None
 
-        if isinstance(reaction, List):
+        if isinstance(reaction, list):
             sr = []
             for i in reaction:
                 if isinstance(i, types.ReactionType):
@@ -453,7 +454,7 @@ class Story(Object, Update):
         block: bool = True,
         progress: Callable = None,
         progress_args: tuple = ()
-    ) -> str:
+    ) -> Optional[Union[str, "io.BytesIO"]]:
         """Bound method *download* of :obj:`~pyrogram.types.Story`.
 
         Use as a shortcut for:
@@ -506,7 +507,10 @@ class Story(Object, Update):
                 You can either keep ``*args`` or add every single extra argument in your function signature.
 
         Returns:
-            On success, the absolute path of the downloaded file as string is returned, None otherwise.
+            ``str`` | ``None`` | :obj:`io.BytesIO`: On success, the absolute path of the downloaded file is returned,
+            otherwise, in case the download failed or was deliberately stopped with
+            :meth:`~pyrogram.Client.stop_transmission`, None is returned.
+            Otherwise, in case ``in_memory=True``, a binary file-like object with its attribute ".name" set is returned.
 
         Raises:
             RPCError: In case of a Telegram RPC error.

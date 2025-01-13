@@ -14,12 +14,27 @@ If you found any issue or have any suggestions, feel free to make `an issue <htt
 Breaking Changes in this Fork
 ==============================
 
+- In :meth:`~pyrogram.Client.download_media`, if the message is a :obj:`~pyrogram.types.PaidMediaInfo` with more than one ``paid_media`` **and** ``idx`` was not specified, then a list of paths or binary file-like objects is returned.
 - Make :meth:`~pyrogram.Client.get_messages` accept only keyword-only arguments. `48d4230 <https://github.com/TelegramPlayGround/pyrogram/commit/48d42304f3ee51034d515919320634935e6b2c83>`_
 - PR `#115 <https://github.com/TelegramPlayGround/pyrogram/pull/115>`_ This `change <https://github.com/pyrogram/pyrogram/pull/966#issuecomment-1108858881>`_ breaks some usages with offset-naive and offset-aware datetimes.
 - PR from upstream: `#1411 <https://github.com/pyrogram/pyrogram/pull/1411>`_ without attribution.
 
 Changes in this Fork
 =====================
+
++------------------------+
+| Scheme layer used: 196 |
++------------------------+
+
+- Added the :meth:`~pyrogram.Client.get_owned_star_count` and a possibly temporary :obj:`~pyrogram.types.StarAmount`.
+- Added the :obj:`~pyrogram.types.UpgradedGift` and changed return type :meth:`~pyrogram.Client.get_available_gifts` and :meth:`~pyrogram.Client.get_user_gifts`.
+- Added the ``pay_for_upgrade`` in the :meth:`~pyrogram.Client.send_gift`.
+- Added the parameters ``upgrade_star_count`` and ``is_for_birthday`` in :obj:`~pyrogram.types.Gift`.
+- Added the :meth:`~pyrogram.Client.on_bot_purchased_paid_media` and :meth:`~pyrogram.Client.on_bot_business_connection`.
+- Added the parameters ``can_be_upgraded``, ``was_refunded``, ``prepaid_upgrade_star_count``, ``can_be_transferred``, ``transfer_star_count``, ``export_date`` in :obj:`~pyrogram.types.UserGift`.
+- Renamed the parameter ``only_in_channels`` to ``chat_type_filter`` in the :meth:`~pyrogram.Client.search_global_count` and :meth:`~pyrogram.Client.search_global`.
+- Removed ``sender_user_id`` parameter from :meth:`~pyrogram.Client.sell_gift` and :meth:`~pyrogram.Client.toggle_gift_is_saved`.
+- View `new and changed <https://telegramplayground.github.io/TG-APIs/TL/diff/tdlib.html?from=195&to=196>`__ `raw API methods <https://telegramplayground.github.io/TG-APIs/TL/diff/tdesktop.html?from=195&to=196>`__.
 
 +------------------------+
 | Scheme layer used: 195 |
