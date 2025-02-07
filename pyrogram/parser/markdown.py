@@ -143,6 +143,7 @@ class Markdown:
 
             if line.startswith(BLOCKQUOTE_ESCAPE_DELIM):
                 text_lines[index] = line[1:]
+                create_blockquote()
                 continue
 
             if line.startswith(BLOCKQUOTE_DELIM):
