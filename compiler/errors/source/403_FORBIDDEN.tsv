@@ -20,6 +20,7 @@ CHAT_SEND_ROUNDVIDEOS_FORBIDDEN	You cannot send video notes in this chat
 CHAT_SEND_STICKERS_FORBIDDEN	You can't send stickers in this chat.
 CHAT_SEND_VIDEOS_FORBIDDEN	You can't send videos in this chat.
 CHAT_SEND_VOICES_FORBIDDEN	You can't send voice recordings in this chat.
+CHAT_TYPE_INVALID	The specified user type is invalid.
 CHAT_WRITE_FORBIDDEN	You can't write in this chat.
 EDIT_BOT_INVITE_FORBIDDEN	Normal users can't edit invites that were created by bots.
 GROUPCALL_ALREADY_STARTED	The groupcall has already started, you can join directly using [phone.joinGroupCall](https://core.telegram.org/method/phone.joinGroupCall).
@@ -29,6 +30,7 @@ MESSAGE_AUTHOR_REQUIRED	Message author required.
 MESSAGE_DELETE_FORBIDDEN	You can't delete one of the messages you tried to delete.
 NOT_ELIGIBLE	You are not eligible to take part in Telegram's Premium for SMS initiative
 PARTICIPANT_JOIN_MISSING	Trying to enable a presentation, when the user hasn't joined the Video Chat with [phone.joinGroupCall](https://core.telegram.org/method/phone.joinGroupCall).
+PEER_ID_INVALID	The provided peer id is invalid.
 POLL_VOTE_REQUIRED	Cast a vote in the poll before calling this method.
 PREMIUM_ACCOUNT_REQUIRED	A premium account is required to execute this action.
 PRIVACY_PREMIUM_REQUIRED	You need a [Telegram Premium subscription](https://core.telegram.org/api/premium) to send a message to this user.
