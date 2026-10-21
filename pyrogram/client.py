@@ -23,6 +23,7 @@ import logging
 import os
 import platform
 import re
+import secrets
 import shutil
 import sys
 from concurrent.futures.thread import ThreadPoolExecutor
