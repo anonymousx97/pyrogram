@@ -17,19 +17,25 @@
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
 import logging
-import time
+import secrets
 
 log = logging.getLogger(__name__)
 
 
 class MsgId:
-    last_time = 0
-    offset = 0
-
     def __new__(cls) -> int:
-        now = int(time.time())
-        cls.offset = (cls.offset + 4) if now == cls.last_time else 0
-        msg_id = (now * 2 ** 32) + cls.offset
-        cls.last_time = now
+        """ uses secrets module to cryptographically generate rnd_id """
+        secure_bytes = secrets.token_bytes(8)
+        return int.from_bytes(secure_bytes, byteorder='big', signed=True)
 
-        return msg_id
+# older buggy implementation
+#    last_time = 0
+#    offset = 0
+#
+#    def __new__(cls) -> int:
+#        now = int(time.time())
+#        cls.offset = (cls.offset + 4) if now == cls.last_time else 0
+#        msg_id = (now * 2 ** 32) + cls.offset
+#        cls.last_time = now
+#
+#        return msg_id
