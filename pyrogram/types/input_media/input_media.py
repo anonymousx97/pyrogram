@@ -17,7 +17,7 @@
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
 import io
-from typing import Optional, Union
+from typing import TYPE_CHECKING, Callable, Optional, Union
 
 from ..messages_and_media import MessageEntity
 from ..object import Object
@@ -32,6 +32,7 @@ class InputMedia(Object):
     - :obj:`~pyrogram.types.InputMediaAnimation`
     - :obj:`~pyrogram.types.InputMediaDocument`
     - :obj:`~pyrogram.types.InputMediaAudio`
+    - :obj:`~pyrogram.types.InputMediaLivePhoto`
     - :obj:`~pyrogram.types.InputMediaPhoto`
     - :obj:`~pyrogram.types.InputMediaVideo`
     """
@@ -39,9 +40,9 @@ class InputMedia(Object):
     def __init__(
         self,
         media: Union[str, "io.BytesIO"],
-        caption: str = "",
+        caption: Optional[str] = "",
         parse_mode: Optional["enums.ParseMode"] = None,
-        caption_entities: list[MessageEntity] = None
+        caption_entities: Optional[list["MessageEntity"]] = None,
     ):
         super().__init__()
 
@@ -49,3 +50,13 @@ class InputMedia(Object):
         self.caption = caption
         self.parse_mode = parse_mode
         self.caption_entities = caption_entities
+
+    async def write(
+        self,
+        client: "pyrogram.Client",
+        chat_id: Optional[Union[int, str]] = None,
+        business_connection_id: Optional[str] = None,
+        progress: Optional[Callable] = None,
+        progress_args: tuple = (),
+    ) -> tuple["raw.base.InputMedia", bool]:
+        raise NotImplementedError

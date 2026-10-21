@@ -58,7 +58,7 @@ class SentCode(Object):
         if isinstance(sent_code, raw.types.auth.SentCodePaymentRequired):
             # TODO: raw.functions.auth.CheckPaidAuth
             raise Unauthorized(
-                f"You need to pay {sent_code.amount}{sent_code.currency} or contact {sent_code.support_email_subject} ({sent_code.support_email_address}) which is currently not supported by Pyrogram."
+                f"You need to purchase premium for {sent_code.premium_days} days by paying {sent_code.amount}{sent_code.currency} or contact {sent_code.support_email_subject} ({sent_code.support_email_address}) which is currently not supported by Pyrogram."
             )
 
         if isinstance(sent_code, raw.types.auth.SentCode):

@@ -77,6 +77,9 @@ class ChatPermissions(Object):
         can_edit_tag (``bool``, *optional*):
             True, if the user may change the tag of self.
 
+        can_react_to_messages (``bool``, *optional*):
+            True, if the user is allowed to react to messages. If omitted, defaults to the value of *can_send_messages*.
+
     """
 
     def __init__(
@@ -98,6 +101,7 @@ class ChatPermissions(Object):
         can_manage_topics: bool = None,
         can_send_media_messages: bool = None,  # Audio files, documents, photos, videos, video notes and voice notes
         can_edit_tag: bool = None,
+        can_react_to_messages: bool = None,
     ):
         super().__init__(None)
 
@@ -117,6 +121,7 @@ class ChatPermissions(Object):
         self.can_manage_topics = can_manage_topics
         self.can_send_media_messages = can_send_media_messages
         self.can_edit_tag = can_edit_tag
+        self.can_react_to_messages = can_react_to_messages
 
     @staticmethod
     def _parse(denied_permissions: "raw.base.ChatBannedRights") -> "ChatPermissions":
@@ -136,6 +141,7 @@ class ChatPermissions(Object):
         can_manage_topics = False
         can_send_media_messages = False
         can_edit_tag = False
+        can_react_to_messages = False
 
         if isinstance(denied_permissions, raw.types.ChatBannedRights):
             can_send_messages = not denied_permissions.send_messages
@@ -177,6 +183,7 @@ class ChatPermissions(Object):
                 can_send_video_notes = can_send_media_messages
                 can_send_voice_notes = can_send_media_messages
             can_edit_tag = not denied_permissions.edit_rank
+            can_react_to_messages = not denied_permissions.send_reactions
 
             return ChatPermissions(
                 can_send_messages=can_send_messages,
@@ -195,6 +202,7 @@ class ChatPermissions(Object):
                 can_manage_topics=can_manage_topics,
                 can_send_media_messages=can_send_media_messages,
                 can_edit_tag=can_edit_tag,
+                can_react_to_messages=can_react_to_messages
             )
 
     def write(
@@ -227,5 +235,6 @@ class ChatPermissions(Object):
             send_roundvideos=not permissions.can_send_video_notes,# TODO
             send_voices=not permissions.can_send_voice_notes,# TODO
             # send_plain:flags.25?true
-            edit_rank=permissions.can_edit_tag,
+            edit_rank=not permissions.can_edit_tag,
+            send_reactions=not permissions.can_react_to_messages if permissions.can_react_to_messages is not None else not permissions.can_send_messages,
         )
