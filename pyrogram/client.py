@@ -344,7 +344,7 @@ class Client(Methods):
             )
 
         self.dispatcher = Dispatcher(self)
-        self.rnd_id = MsgId
+        self.rnd_id = lambda: secrets.randbits(63)
         self.parser = Parser(self)
         self.session = None
 
